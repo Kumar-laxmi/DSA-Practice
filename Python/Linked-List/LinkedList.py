@@ -15,11 +15,11 @@ class LinkedList:
     
     # To find length of Linked List
     def getLength(self):
-        count = 0
+        count = 1
         ptr = self.head
         while (ptr):
-            count = count + 1
             ptr = ptr.next
+            count = count + 1
         return count
 
     # To insert new data in beginning
