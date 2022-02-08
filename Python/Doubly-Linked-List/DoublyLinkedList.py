@@ -12,7 +12,7 @@ class DoublyLinkedList:
     def PrintList(self):
         ptr = self.head
         while ptr:
-            print("{}".format(ptr.data),end="<->")
+            print("<-> {}".format(ptr.data),end=" ")
             ptr = ptr.next
     
     #To return the length of list
@@ -70,38 +70,43 @@ class DoublyLinkedList:
         print("{} inserted successfully to the end of the list".format(newValue))
 
     #To delete Node
-    def DeleteNode(self,key):
-        ptr = self.head
-
+    def DeleteNode(self,position):
         if self.head is None:
-            print("\nSorry the list is empty!!!\n")
-            return
-        
-        #First node is to deleted
-        if self.head.data==key:
-            temp = self.head
-            temp.next.prev = None
-            self.head = temp.next
-            print("\n{} deleted successfully".format(key))
+            print("Invalid Deletion!, REASON: Empty List")
+        elif position<0 or position>=self.Length():
+            print("Invalid Deletion!, REASON: position requested out of bounds")
+        elif position==0:
+            self.DeleteNodeBeginning()
+        elif position==self.Length()-1:
+            self.DeleteNodeEnd()
+        else:
+            temp = self.head.next
+            prevNode = self.head
+            for i in range(1,position-1):
+                temp = temp.next
+                prevNode = prevNode.next
+            prevNode.next = temp.next
+            temp.next.prev = prevNode
+            print("\n{} deleted successfully at position: {}".format(temp.data,position))
             temp = None
-            return
-        
-        while ptr:
-            if ptr.data is key and ptr.next is not None:
-                prevNode.next = nextNode
-                nextNode.prev = prevNode
-                print("{} deleted successfully".format(key))
-                ptr = None
-                return 
-            else:
-                prevNode.next = None
-                ptr = None
-                print("{} deleted successfully".format(key))
+    
+    #To delete Node at the beginning of the list
+    def DeleteNodeBeginning(self):
+        temp = self.head
+        self.head.next.prev = None
+        self.head = temp.next
+        print("\n{} deleted successfully at position: 0".format(temp.data))
+        temp = None
+    
+    #To delete Node at the end of the list
+    def DeleteNodeEnd(self):
+        ptr = self.head
+        while ptr.next is not None:
             prevNode = ptr
             ptr = ptr.next
-            if ptr.next is not None:
-                nextNode = ptr.next
-            
+        prevNode.next = None
+        print("\n{} deleted successfully at position: {}".format(ptr.data,self.Length()-1))
+        ptr = None
 
 
 dll = DoublyLinkedList()
@@ -113,20 +118,20 @@ print("Enter 4 to Exit")
 while True:
     choice = int(input("\nEnter a choice: "))
     if choice==1:
-        print("<<<  Choice 1 selected  >>>")
+        print("\n<<<  Choice 1 selected  >>>")
         newValue = int(input("Enter the data: "))
         position = int(input("Enter the position: "))
         dll.InsertNode(newValue,position)
     elif choice==2:
-        print("<<<  Choice 2 selected  >>>")
-        key = int(input("Enter the key to be deleted: "))
-        dll.DeleteNode(key)
+        print("\n<<<  Choice 2 selected  >>>")
+        position = int(input("Enter the position to be deleted: "))
+        dll.DeleteNode(position)
     elif choice==3:
-        print("<<<  Choice 3 selected  >>>")
+        print("\n<<<  Choice 3 selected  >>>")
         print("\nThe Doubly Linked-List is ==>")
         dll.PrintList()
     elif choice==4:
-        print("<<<  Choice 4 selected , EXIT INITIATED...  >>>")
+        print("\n <<<  Choice 4 selected , EXIT INITIATED...  >>>")
         break
     else:
         print("\nInvalid choice, Enter a correct choice!!!")
