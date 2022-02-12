@@ -18,7 +18,7 @@ class DoublyLinkedList:
     #To return the length of list
     def Length(self):
         ptr = self.head
-        count = 1
+        count = 0
         while ptr:
             ptr = ptr.next
             count = count + 1
