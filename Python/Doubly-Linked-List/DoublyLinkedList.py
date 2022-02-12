@@ -12,7 +12,7 @@ class DoublyLinkedList:
     def PrintList(self):
         ptr = self.head
         while ptr:
-            print("<-> {}".format(ptr.data),end=" ")
+            print("{}".format(ptr.data),end="<->")
             ptr = ptr.next
     
     #To return the length of list
@@ -37,19 +37,7 @@ class DoublyLinkedList:
         elif position==self.Length():
             self.InsertElementEnd(newValue)
         else:
-            newNode = Node(newValue)
-            ptr = self.head
-            count = 0
-            while ptr:
-                if count==position-1:
-                    newNode.next = ptr.next
-                    ptr.next = newNode
-                    newNode.prev = ptr
-                    if newNode.next:
-                        newNode.next.prev = newNode
-                ptr = ptr.next
-                count = count + 1
-            print("{} inserted successfully to position no. {} of the list".format(newValue,position))
+            self.InsertElementAtPosition(newValue,position)
     
     #To insert to beginning of the list
     def InsertElementBeginning(self,newValue):
@@ -68,6 +56,21 @@ class DoublyLinkedList:
         ptr.next = newNode
         newNode.prev = ptr
         print("{} inserted successfully to the end of the list".format(newValue))
+    
+    def InsertElementAtPosition(self,newValue,position):
+        newNode = Node(newValue)
+        ptr = self.head
+        count = 0
+        while ptr:
+            if count==position-1:
+                newNode.next = ptr.next
+                ptr.next = newNode
+                newNode.prev = ptr
+                if newNode.next:
+                    newNode.next.prev = newNode
+            ptr = ptr.next
+            count = count + 1
+        print("{} inserted successfully to position no. {} of the list".format(newValue,position))
 
     #To delete Node
     def DeleteNode(self,position):
@@ -80,15 +83,7 @@ class DoublyLinkedList:
         elif position==self.Length()-1:
             self.DeleteNodeEnd()
         else:
-            temp = self.head.next
-            prevNode = self.head
-            for i in range(1,position-1):
-                temp = temp.next
-                prevNode = prevNode.next
-            prevNode.next = temp.next
-            temp.next.prev = prevNode
-            print("\n{} deleted successfully at position: {}".format(temp.data,position))
-            temp = None
+            self.DeleteNodeAtPosition(position)
     
     #To delete Node at the beginning of the list
     def DeleteNodeBeginning(self):
@@ -107,7 +102,17 @@ class DoublyLinkedList:
         prevNode.next = None
         print("\n{} deleted successfully at position: {}".format(ptr.data,self.Length()-1))
         ptr = None
-
+    
+    def DeleteNodeAtPosition(self,position):
+        temp = self.head.next
+        prevNode = self.head
+        for i in range(1,position-1):
+            temp = temp.next
+            prevNode = prevNode.next
+        prevNode.next = temp.next
+        temp.next.prev = prevNode
+        print("\n{} deleted successfully at position: {}".format(temp.data,position))
+        temp = None
 
 dll = DoublyLinkedList()
 print("Enter 1 to Insert")
