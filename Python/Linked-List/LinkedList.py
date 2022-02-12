@@ -18,8 +18,8 @@ class LinkedList:
         count = 1
         ptr = self.head
         while (ptr):
-            ptr = ptr.next
             count = count + 1
+            ptr = ptr.next
         return count
 
     # To insert new data in beginning
@@ -28,7 +28,7 @@ class LinkedList:
         ptr = self.head
         newNode.next = ptr
         self.head = newNode
-        print("{} entered successfully at position 0".format(newData))
+        print("\n{} entered successfully at position 0".format(newData))
 
     # To insert new data in end
     def InsertElementEnd(self,newData):
@@ -37,58 +37,81 @@ class LinkedList:
         while (ptr):
             ptr = ptr.next
         ptr.next = newNode
-        print("{} entered successfully at position last".format(newData))
+        print("\n{} entered successfully at position last".format(newData))
+    
+    def InsertElementAtPosition(self,newData,position):
+        ptr = self.head
+        newNode = Node(newData)
+        count = 1
+        while ptr:
+            if count==position:
+                newNode.next = ptr.next
+                ptr.next = newNode
+                print("\n{} entered successfully at position {}".format(newData,position))
+                break
+            ptr = ptr.next
+            count = count + 1
 
     # To insert new node
     def InsertElement(self,newData,position):
-        newNode = Node(newData)
         if self.head is None:
+            newNode = Node(newData)
             self.head = newNode
-            print("{} inserted as first element in linked list".format(newData))
+            print("\n{} inserted as first element in linked list".format(newData))
         else:
-            count = 0
-            ptr = self.head
-            while (ptr):
-                if position<0 or position>self.getLength():
-                    print("Position Out of Bound")
-                    break
-                if position==0:
-                    self.InsertElementBeginning(newData)
-                    break
-                elif position==self.getLength()-1:
-                    self.InsertElementEnd(newData)
-                elif count==position-1:
-                    temp = ptr
-                    newNode.next = temp.next
-                    ptr.next = newNode
-                    print("{} entered successfully at position {}".format(newData,position))
-                    break
-                ptr = ptr.next
-                count = count + 1
+            if position<0 or position>self.getLength():
+                print("\nPosition Out of Bound")
+            elif position==0:
+                self.InsertElementBeginning(newData)
+            elif position==self.getLength():
+                self.InsertElementEnd(newData)
+            else:
+                self.InsertElementAtPosition(newData,position)
     
     # To delete a node
-    def DeleteNode(self, key):
+    def DeleteNode(self, position):
+        if self.head==None:
+            print("\nSorry the list is empty")
+        elif position<0 or position>=self.getLength():
+            print("\nInvalid Deletion! REASON:Invalid position entered")
+        elif position==0:
+            self.DeleteNodeBeginning()
+        elif position==self.getLength()-1:
+            self.DeleteNodeEnd()
+        else:
+            self.DeleteNodeAtPosition(position)
+    
+    def DeleteNodeBeginning(self):
         temp = self.head
- 
-        if (temp is not None):
-            if (temp.data == key):
-                self.head = temp.next
-                temp = None
-                return
- 
-        while(temp is not None):
-            if temp.data == key:
-                break
-            prev = temp
-            temp = temp.next
- 
-        if(temp == None):
-            return
- 
-        prev.next = temp.next
-        print("\n{} deleted successfully".format(key))
+        self.head = temp.next
+        print("\n{} deleted in Linked List, Position: BEGINNING".format(temp.data))
         temp = None
+    
+    def DeleteNodeEnd(self):
+        prevNode = self.head
+        temp = self.head.next
+        while temp:
+            prevNode = prevNode.next
+            temp = temp.next
+        prevNode.next = None
+        print("\n{} deleted in Linked List, Position: END".format(temp.data))
+        temp = None
+    
+    def DeleteNodeAtPosition(self,position):
+        prevNode = self.head
+        temp = self.head.next
+        count = 1
+        while temp:
+            if count==position:
+                prevNode.next = temp.next
+                print("\n{} deleted in Linked List, Position: {}".format(temp.data,position))
+                temp = None
+                break
+            prevNode = prevNode.next
+            temp = temp.next
+            count = count + 1
 
+        
 ll = LinkedList()
 choice = 1
 print("Enter 1 to Insert")
@@ -102,7 +125,7 @@ while choice!=4:
         position = int(input("Enter the position: "))
         ll.InsertElement(newData,position)
     elif choice==2:
-        key = int(input("\nEnter the key value to delete: "))
+        key = int(input("\nEnter the position value to delete: "))
         ll.DeleteNode(key)
     elif choice==3:
         print("\nThe Linked List is: ")
@@ -110,4 +133,4 @@ while choice!=4:
     elif choice==4:
         break
     else:
-        print("Invalid choice")
+        print("\nInvalid choice")
