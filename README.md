@@ -18,6 +18,7 @@ Together, data structures and algorithms combine and allow programmers to build 
 - Stack
   - Stack Using Array
   - Stack Using Linked-List
+  - Stack Using Collections/Standard Template Library(STL)
 - Queue
 - Sorting Algorithm
   - Selection Sort
