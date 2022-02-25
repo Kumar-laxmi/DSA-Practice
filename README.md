@@ -13,13 +13,16 @@ Together, data structures and algorithms combine and allow programmers to build 
 - Circular Linked List
   - Singly Circular Linked List
   - Doubly Circular Linked List
-
-### List of Algorithms:
 - Stack
   - Stack Using Array
   - Stack Using Linked-List
   - Stack Using Collections/Standard Template Library(STL)
 - Queue
+  - Queue Using Array
+  - Queue Using Linked-List
+  - Queue Using Collections/Standard Template Library(STL)
+
+### List of Algorithms:
 - Sorting Algorithm
   - Selection Sort
   - Bubble Sort
