@@ -29,6 +29,7 @@ Together, data structures and algorithms combine and allow programmers to build 
   - Insertion Sort
   - Quick Sort
   - Merge Sort
+  - Heap Sort
 - Searching Algorithm
   - Linear Search
   - Binary Search
