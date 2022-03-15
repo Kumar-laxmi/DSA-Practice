@@ -21,6 +21,8 @@ Together, data structures and algorithms combine and allow programmers to build 
   - Queue Using Array
   - Queue Using Linked-List
   - Queue Using Collections/Standard Template Library(STL)
+- Trees
+  - Binary Tree
 
 ### List of Algorithms:
 - Sorting Algorithm
