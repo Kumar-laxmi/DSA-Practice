@@ -22,7 +22,7 @@ Together, data structures and algorithms combine and allow programmers to build 
   - Queue Using Linked-List
   - Queue Using Collections/Standard Template Library(STL)
 - Trees
-  - Binary Tree
+  - Binary Search Tree
   - AVL Tree
 
 ### List of Algorithms:
